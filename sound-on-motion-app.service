@@ -3,7 +3,7 @@ Description=Sound on Motion App Service
 After=network.target
 
 [Service]
-User=root
+User=pi
 WorkingDirectory=/opt/sound-on-motion
 ExecStart=/bin/sh ./entrypoint.sh python -m src.app
 Restart=always

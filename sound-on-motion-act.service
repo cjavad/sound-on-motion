@@ -3,7 +3,7 @@ Description=Sound on Motion Act Service
 After=network.target
 
 [Service]
-User=root
+User=pi
 WorkingDirectory=/opt/sound-on-motion
 ExecStart=/bin/sh ./entrypoint.sh python -m src.act
 Restart=always

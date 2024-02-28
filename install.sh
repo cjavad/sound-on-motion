@@ -1,5 +1,10 @@
 #!/bin/bash
+# Cleanup old installation
+sudo systemctl stop sound-on-motion-app
+sudo systemctl stop sound-on-motion-act
 
+
+rm -f /opt/sound-on-motion
 # Symlink this directory to /opt/sound-on-motion
 ln -s $(pwd) /opt/sound-on-motion
 
