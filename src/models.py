@@ -24,5 +24,8 @@ class ActiveSound:
             file.write(sound)
 
     def get_active_sound_path(self):
+        if not self.active_sound:
+            return None
+
         return SOUND_PATH / self.active_sound
 

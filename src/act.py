@@ -6,7 +6,7 @@ def play_active_sound():
     active_sound = ActiveSound()
     active_sound_path = active_sound.get_active_sound_path()
 
-    if not active_sound_path.exists():
+    if not active_sound_path or not active_sound_path.exists():
         print(f"Active sound file '{active_sound_path}' not found")
         return
 
