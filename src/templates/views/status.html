@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container margin-top-small">
+    {% if info %}
+        <div class="row alert-success">
+            <h2>Success!</h2>
+            <p>{{ info }}</p>
+        </div>
+    {% elif status_code %}
+        <div class="row">
+            {% if status_code == 404 %}
+                <div class="alert-danger">
+                    <h2>Error 404</h2>
+                    <p>File not found.</p>
+                </div>
+            {% elif status_code == 500 %}
+                <div class="alert-danger">
+                    <h2>Error 500</h2>
+                    <p>Internal server error.</p>
+                </div>
+            {% else %}
+                <div class="alert-warning">
+                    <h2>Warning</h2>
+                    <p>Unexpected status code: {{ status_code }}.</p>
+                </div>
+            {% endif %}
+
+            {% if status_message %}
+                <div class="alert-warning">
+                    <h2>Warning</h2>
+                    <p>{{ status_message }}</p>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="row alert-info">
+            <h2>Information</h2>
+            <p>No specific information or status code provided.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

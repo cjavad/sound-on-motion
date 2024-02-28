@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Uploaded Sound Files</h2>
+    <div class="row">
+        {% for sound in sounds %}
+            <div class="col sm-12 md-6 lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ sound.filename }}</h5>
+                        <audio controls>
+                            <source src="/static/sounds/{{ sound.filename }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="flex-center">
+                            {% if sound.is_active %} 
+                                <p class="text-center alert-success padding-small">Active</p>
+                            {% else %}
+                                <p class="alert-warning">Not Active</p>
+                                <form action="/set_active" method="post">
+                                    <input type="hidden" name="sound_id" value="{{ sound.id }}">
+                                    <button type="submit" class="button-secondary">Set as Active</button>
+                                </form>
+                            {% endif %}
+                            <form action="/delete" method="post">
+                                <input type="hidden" name="sound_id" value="{{ sound.id }}">
+                                <button type="submit" class="btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>No sound files uploaded yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

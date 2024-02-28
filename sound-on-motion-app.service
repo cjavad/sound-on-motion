@@ -1,0 +1,13 @@
+[Unit]
+Description=Sound on Motion App Service
+After=network.target
+
+[Service]
+User=<YourUsername>
+Group=<YourUsername>
+WorkingDirectory=/opt/sound-on-motion
+ExecStart=/usr/bin/pipenv run python -m src.app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
