@@ -10,16 +10,24 @@ def play_active_sound():
         print(f"Active sound file '{active_sound_path}' not found")
         return
 
-    playsound(active_sound_path)
+    playsound(active_sound_path, block=False)
 
 
 def main():
     pir = MotionSensor(4)
-    pir.when_motion = play_active_sound
-    print("Ready")
-    input("Press Enter to exit")
-    print("Exiting")
+
+    while True:
+        try:
+            pir.wait_for_motion()
+            play_active_sound()
+            pir.wait_for_no_motion()
+        except KeyboardInterrupt:
+            break
+
+        except:
+            pass
+
 
 if __name__ == "__main__":
     play_active_sound()
-    # main()
+    main()

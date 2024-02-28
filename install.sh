@@ -12,3 +12,5 @@ sudo systemctl daemon-reload
 # Enable now
 sudo systemctl enable --now sound-on-motion-app
 sudo systemctl enable --now sound-on-motion-act
+
+pipenv install

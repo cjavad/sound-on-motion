@@ -3,10 +3,9 @@ Description=Sound on Motion Act Service
 After=network.target
 
 [Service]
-User=<YourUsername>
-Group=<YourUsername>
+User=root
 WorkingDirectory=/opt/sound-on-motion
-ExecStart=/usr/bin/pipenv run python -m src.act
+ExecStart=/bin/sh ./entrypoint.sh python -m src.act
 Restart=always
 
 [Install]
