@@ -1,6 +1,6 @@
 from gpiozero import MotionSensor
 from .models import ActiveSound
-import subprocess
+from playsound import playsound
 
 def play_active_sound():
     active_sound = ActiveSound()
@@ -11,7 +11,7 @@ def play_active_sound():
         return
     
     # Spawn aplay
-    subprocess.run(["aplay", str(active_sound_path)], check=True)
+    playsound(active_sound_path)
 
 
 def main():

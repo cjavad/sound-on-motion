@@ -1,6 +1,6 @@
 [Unit]
 Description=Sound on Motion Act Service
-After=network.target
+After=network.target sound.target bluetooth.target
 
 [Service]
 User=pi
