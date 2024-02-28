@@ -1,6 +1,6 @@
 from gpiozero import MotionSensor
 from .models import ActiveSound
-from playsound import playsound
+import subprocess
 
 def play_active_sound():
     active_sound = ActiveSound()
@@ -9,8 +9,9 @@ def play_active_sound():
     if not active_sound_path or not active_sound_path.exists():
         print(f"Active sound file '{active_sound_path}' not found")
         return
-
-    playsound(active_sound_path, block=False)
+    
+    # Spawn aplay
+    subprocess.run(["aplay", str(active_sound_path)], check=True)
 
 
 def main():
