@@ -8,14 +8,16 @@ if ! aplay -l | grep -q 'card 0'; then
     exit 1
 fi
 
-# Start tmux server if not already running
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
+ensure_tmux_session() {
+    # echo $1 $2 $3
+    # https://unix.stackexchange.com/questions/443569/start-tmux-and-execute-a-set-of-commands-on-boot
+    if tmux has-session -t $1 > /dev/null 2>&1; then
+        :
+    else
+        tmux new-session -d -s $1 
+        tmux send-keys -t $1 "cd $2" C-m
+        tmux send-keys -t $1 "$3" C-m
+    fi
+}
 
-if tmux has-session -t auto-session > /dev/null 2>&1; then
-    :
-else
-    tmux new-session -d -s auto-session -n foo bar
-    tmux new-window -d -t auto-session /opt/sound-on-motion/start.sh
-fi
+ensure_tmux_session "sound-on-motion-act" "/opt/sound-on-motion" "/opt/sound-on-motion/start.sh"
