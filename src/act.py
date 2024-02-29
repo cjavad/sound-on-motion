@@ -9,8 +9,7 @@ def play_active_sound():
     if not active_sound_path or not active_sound_path.exists():
         print(f"Active sound file '{active_sound_path}' not found")
         return
-    
-    # Spawn aplay
+
     playsound(active_sound_path)
 
 
