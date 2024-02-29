@@ -1,9 +1,10 @@
 #!/bin/bash
-source ~/.bash_profile
+source ~/.bashrc
 
 # Check if ALSA 'default' device is available
 if ! aplay -l | grep -q 'card 0'; then
     echo "Error: No sound card detected. Exiting."
+    aplay -l
     exit 1
 fi
 
